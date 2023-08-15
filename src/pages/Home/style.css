@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+}
+
+.lista-filmes {
+    margin: 15px;
+}
+
+.lista-filmes  article {
+    margin: 15px;
+    padding: 15px;
+}
+
+.lista-filmes h3 {
+    font-size: 20pt;
+    margin: 20px;
+    text-align: center;
+}
+
+.lista-filmes p {
+    margin: 15px;
+    text-align: justify;
+}
+
+.lista-filmes img {
+    width: 100%;
+    height: 250px;
+}
+
+.lista-filmes a {
+    width: 100%;
+    background-color: brown;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+}

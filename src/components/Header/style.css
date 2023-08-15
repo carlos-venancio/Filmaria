@@ -1,0 +1,12 @@
+.menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    height: 60px;
+    background-color: brown;
+}
+
+.menu > a {
+    color: white;
+    text-decoration: none;
+}
