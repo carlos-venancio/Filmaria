@@ -1,0 +1,91 @@
+import { useParams, useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { useState, useEffect } from "react"
+import { toast } from "react-toastify"
+import api from '../../services/api'
+import './style.css'
+
+export default function Filme(){
+
+    // pega um valor digitado no redirecionamento da rota, nesse caso o "id" 
+    const { id } = useParams();
+    // link usado pelo desenvolvedor que não precisa de evento do cliente para acionar
+    const history = useHistory();
+    // vai guardar as informações do filme
+    const [filme,setFilme] = useState([]);
+    // faz com que a página fique RECARREGANDO enquanto o valor não for alterado para falso
+    const [loading,setLoading] = useState(true);
+
+    useEffect(() => {
+
+        // função para buscar os filmes no banco de dados pela api
+        async function loadFilme(){
+            const resposta = await fetch(`r-api?api=filme/${id}`)
+
+            // caso não retorne dados do filme mande para a home
+            if (resposta.formData.length === 0){
+                // troca a rota para "/", nesse caso a home do site
+                history.replace("/")
+            }
+
+            // caso retorna coloque na variavel filme e para de recarregar a pagina
+            setFilme(resposta.data)
+            setLoading(false);
+        };
+
+        loadFilme()
+
+    },[history,id]);
+
+    // função para slavar os filmes no localstorage
+    function salvarFilme(){
+        const armazenamentoLocal  = localStorage.getItem('filmes');
+        // conversão para json do conteudo do armazenamento local
+        let filmesSalvos = JSON.parse(armazenamentoLocal) || [];
+        
+        // consulta se o li
+        let hasFilme = filmesSalvos.some((filme) => filme.id == filmesSalvos.id);
+
+        if (hasFilme){
+            toast.error("Você já salvou esse filme")
+            return 
+        }
+
+        // adiciona o filme para poder converter para JSON
+        filmesSalvos.push(filme);
+        // adiciona o filme ao armazenamenro local
+        localStorage.setItem('filmes', JSON.stringify(filmesSalvos));
+        toast.success('Filme salvo com sucesso');
+
+    }
+
+    if(loading){
+        return (
+            <div className="container">
+                <div>
+                    <h2>Carregando a página...</h2>
+                </div>
+            </div>
+        )
+    }
+
+    return (
+        <div className="container">
+            <div className="info-filme">
+                <article key={filme.id}>
+                    <h2> {filme.nome} </h2>
+                    <img src={filme.foto} alt={filme.nome}/>
+
+                    <h3> Sinopse </h3>
+                    <p> {filme.sinopse} </p>
+
+                    <div className="container-btn">
+                        <button onClick={salvarFilme()}>Salvar</button>
+                        <button>
+                            <a href={``}>  </a>
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    )
+}

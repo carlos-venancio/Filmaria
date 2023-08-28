@@ -22,17 +22,17 @@ export default function Home(){
     },[])
 
     return (
-
         <div className='container'>
         {/* Cria varias estruturas com informações diferentes vindas da api */}
             <div className='lista-filmes'>
                 {filmes.map((filme) => {
                     return (
                         <article key={filme.id}>
-                            <h3> {filme.nome} </h3>
+                            <strong> {filme.nome} </strong>
                             <p> {filme.sinopse} </p>
                             <img src={filme.foto} alt={filme.nome} />
-                            <Link to={`/filme/${filme.id}`}>Acessar</Link>
+                            {/* link com o id do filme no banco de dados  */}
+                            <Link to={`/filme/${filme.id}`} className="link">Acessar</Link>
                         </article>
                     )
                 })}
