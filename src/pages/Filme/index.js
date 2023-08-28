@@ -36,15 +36,15 @@ export default function Filme(){
 
     },[history,id]);
 
-    // função para slavar os filmes no localstorage
+    // função para adicionar o filme no localstorage
     function salvarFilme(){
         const armazenamentoLocal  = localStorage.getItem('filmes');
         // conversão para json do conteudo do armazenamento local
-        let filmesSalvos = JSON.parse(armazenamentoLocal) || [];
-        
-        // consulta se o li
-        let hasFilme = filmesSalvos.some((filme) => filme.id == filmesSalvos.id);
+        let filmesSalvos = JSON.parse(armazenamentoLocal) || []; // ?
+        console.log(filmesSalvos)
 
+        // Valida se já eiste o filme no local storage
+        let hasFilme = filmesSalvos.some((filme) => filme.id == filmesSalvos.id);
         if (hasFilme){
             toast.error("Você já salvou esse filme")
             return 
@@ -61,9 +61,9 @@ export default function Filme(){
     if(loading){
         return (
             <div className="container">
-                <div>
+                <article>
                     <h2>Carregando a página...</h2>
-                </div>
+                </article>
             </div>
         )
     }

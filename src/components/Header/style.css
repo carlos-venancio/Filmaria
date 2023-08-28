@@ -9,15 +9,23 @@
 
 .menu > a {
     text-align: center;
-    font-size: 14pt;
-    color: white;
     text-decoration: none;
+}
+
+.logo {
+    font-size: 20pt;
+    color: white;
 }
 
 .favoritos {
     border: none;
-    color: black !important;
+    font-weight: bold;
+    color: black;
     background-color: white;
-    border-radius: 8px;
-    padding: 6px;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+
+.favoritos:hover {
+    border: 1px solid white;
 }
