@@ -5,20 +5,18 @@ import './favoritos.css'
 
 export default function Favoritos() {
 
-    const [filmes,setFilmes] = useState();
+    const [filmes,setFilmes] = useState([]);
 
     useEffect(() => {
         const lista = localStorage.getItem('filmes')
-        setFilmes(JSON.parse(lista))
-
-
+        setFilmes(JSON.parse(lista) || [])
     },[])
 
     function deleteFilme(id){
         // faça uma nova lista só que sem o valor
         // remove da lista filme todos os valores iguais à id
         let filmesFiltrados = filmes.filter((item) => {
-            return (item.id != id)
+            return (item.id !== id)
         })
 
         toast.success("Filme deletado com sucesso");
@@ -41,8 +39,8 @@ export default function Favoritos() {
                                     <span>{item.nome}</span>
 
                                     <div>
-                                        <Link to={`/filmes/${item.id}`}>Ver detalher</Link>
-                                        <button onClick={deleteFilme(item.id)}> Salvar </button>
+                                        <Link to={`/filmes/${item.id}`}>Ver detalhes</Link>
+                                        <button onClick={() => deleteFilme(item.id)}> Excluir </button>
                                     </div>
                                 </li>            
                             )

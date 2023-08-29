@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 800px;
+    min-width: 300px;
+    max-width: 840px;
 }
 
 .lista-filmes {
@@ -18,20 +19,20 @@
     padding: 15px;
 }
 
-.lista-filmes h3 {
+.lista-filmes strong {
     font-size: 20pt;
     margin: 20px;
     text-align: center;
 }
 
 .lista-filmes p {
-    margin: 15px;
+    margin: 15px 0;
     text-align: justify;
 }
 
 .lista-filmes img {
     width: 100%;
-    height: 350px;
+    min-height: 200px;
 }
 
 .lista-filmes article .link {

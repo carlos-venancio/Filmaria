@@ -14,7 +14,6 @@ export default function Home(){
         // ler os filmes
         async function lerFilmes(){
             const resposta = await api.get('r-api/?api=filmes')
-            console.log(resposta)
             setFilmes(resposta.data)
         }
 

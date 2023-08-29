@@ -24,8 +24,10 @@
     background-color: white;
     border-radius: 5px;
     padding: 3px 5px;
+    transition: all 0.5s;
 }
 
 .favoritos:hover {
-    border: 1px solid white;
+    color: white;
+    background-color: brown;
 }

@@ -1,31 +1,52 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
 } 
 
+.container article {
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+}
+
 .info-filme article > img {
-    height: 250px;
+    width: 100%;
     border-radius: 20px;
+    margin: 25px 0;
 }
 
 .info-filme article p {
-    margin: 15px;
+    font-size: 16px;
+    margin: 25px 0;
     text-align: justify;
 }
 
 .container-btn button{
+    border: none;
     font-size: 20px;
     text-align: center;
 
-    padding:15px;
+    padding: 10px;
     margin: 15px;
 
     background-color: #f0f0f0;
-    border-radius: 15px;
+    border-radius: 7px;
     cursor: pointer;
+}
+
+.container-btn a {
+    padding: 10px 0;
+    text-decoration: none;
+    color: black;
 }
 
 .container-btn button:hover {
     color: white;
-    background-color: red;
+    background-color: brown;
+}
+
+.container-btn a:hover {
+    color: white;
 }

@@ -16,13 +16,12 @@ export default function Filme(){
     const [loading,setLoading] = useState(true);
 
     useEffect(() => {
-
         // função para buscar os filmes no banco de dados pela api
         async function loadFilme(){
-            const resposta = await fetch(`r-api?api=filme/${id}`)
+            const resposta = await api.get(`r-api/?api=filmes/${id}`)
 
             // caso não retorne dados do filme mande para a home
-            if (resposta.formData.length === 0){
+            if (resposta.data.length === 0){
                 // troca a rota para "/", nesse caso a home do site
                 history.replace("/")
             }
@@ -34,7 +33,9 @@ export default function Filme(){
 
         loadFilme()
 
-    },[history,id]);
+        return
+
+    }, [history,id]);
 
     // função para adicionar o filme no localstorage
     function salvarFilme(){
@@ -44,7 +45,7 @@ export default function Filme(){
         console.log(filmesSalvos)
 
         // Valida se já eiste o filme no local storage
-        let hasFilme = filmesSalvos.some((filme) => filme.id == filmesSalvos.id);
+        let hasFilme = filmesSalvos.some((filmeSalvo) => filmeSalvo.id === filme.id);
         if (hasFilme){
             toast.error("Você já salvou esse filme")
             return 
@@ -79,9 +80,10 @@ export default function Filme(){
                     <p> {filme.sinopse} </p>
 
                     <div className="container-btn">
-                        <button onClick={salvarFilme()}>Salvar</button>
+                        {/* porque buga */}
+                        <button onClick={salvarFilme}>Salvar</button>
                         <button>
-                            <a href={``}>  </a>
+                            <a target="_blank" href={`https://www.youtube.com/results?search_query=${filme.nome} trailer`}> Trailer </a>
                         </button>
                     </div>
                 </article>
