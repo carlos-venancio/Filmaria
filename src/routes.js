@@ -1,33 +1,22 @@
-// Serve para gestão interna do conteudo do site
-
 import React from 'react'
-import Header from './components/Header/index'
-// o que é isso
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Home from './pages/Home'
-import Favoritos from './pages/Favoritos'
-import Erro from './pages/Erro'
-import Filme from './pages/Filme'
+import Artigo from './pages/Artigo'
+import NotFound from './pages/NotFound'
+import Categoria from './pages/Categoria'
 
-// configura o que acontece caso o usuario coloque determinada rota sem usar o link
-
-const Routes = () => {
+// gerenciamento interno das "páginas"
+export default function Rotas() {
     return (
         <BrowserRouter>
-            {/* Renderiza o header em todas as telas */}
-            <Header/>
-            {/* torna o conteudo do site flexivel */}
-            <Switch>
-                {/* Configura exatamente o que aparece (o componente) caso o usuario digite a rota (excat path) */}
-                <Route exact path='/' component={Home}/>
-                {/* : indica que é variavel */}
-                <Route exact path='/filme/:id' component={Filme}/>
-                <Route exact path='/favoritos' component={Favoritos}/>
-                <Route exact path='*' component={Erro}/>
-            </Switch>
+        {/* configuração do caminho das 4 páginas */}
+            <Routes>
+                <Route exact path="/:category" Component={Categoria}/>
+                <Route exact path="/:category/:title" Component={Artigo}/>
+                <Route exact path="/" Component={Home}/>
+                <Route exact path="*" Component={NotFound}/>
+            </Routes>
         </BrowserRouter>
     )
 }
-
-export default Routes;
