@@ -6,7 +6,7 @@ export default function CardSimples(props) {
         <div className="container-card">
             <img src={`${props.image}`} alt={`${props.title}`}/>
 
-            <Link to={`${props.category}/${props.title}`}>
+            <Link to={`${props.category}/${props.id}`}>
                 <p> {props.title} </p>
             </Link>
         </div>
