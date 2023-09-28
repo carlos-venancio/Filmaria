@@ -1,47 +1,41 @@
-import { useState, useEffect } from "react"
-import MontarCard from "../../components/montarCard"
-import Btn from "../../components/btn/index.js"
-import ConsultarArtigos from "../../components/consultaArtigos/index.js"
+import api from '../../services/api'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import './style.css'
 
-export default function Home() {
-    
-    // faz um carregamento de página enquanto está pesquisando os dados
-    const [loading,setLoading] = useState(true)
+export default function Home(){
 
+    // é usado principalmente para segurança
+    // cria um objeto com uma atributo e uma função que altera o conteudo da atributo 
+    const [filmes,setFilmes] = useState([])
+
+    // o useEffect é executado na hora da leitura da pagina
     useEffect(() => {
-        // carregar algumas categorias por padrão
-        ConsultarArtigos('entertainment')
-        ConsultarArtigos('politics')
-        ConsultarArtigos('business')
+        // ler os filmes
+        async function lerFilmes(){
+            const resposta = await api.get('r-api/?api=filmes')
+            setFilmes(resposta.data)
+        }
 
-        // espera 3s para evita que a página dê erro por ainda não ter retornado os dados
-        setTimeout(() => {
-            setLoading(false)
-        },3000)
-
+        lerFilmes()
     },[])
 
-    if (loading){
-        return (
-            <div className="home">
-                <div className="icone-carregamento">Carregando...</div>
-            </div>
-        )
-    } 
-
     return (
-        <div className="home">
-            <MontarCard qtd={1} categoria={'entertainment'} cartao={3} />
-            <h1> Politica </h1>
-            {/* coloca na tela as categorias selecionadas  */}
-            {/* IMPLEMENTAR: pré-carregar todos os tópicos e coloca-los na página */}
-            <MontarCard qtd={3} categoria={'politics'} cartao={1}/>
-            <Btn categoria={'politics'}> Leia Mais </Btn>
-
-            <h1> Negócios </h1>
-            <MontarCard qtd={3} categoria={'business'} cartao={2} />
-            
-            <MontarCard qtd={3} categoria={'entertainment'} cartao={1} />
+        <div className='container'>
+        {/* Cria varias estruturas com informações diferentes vindas da api */}
+            <div className='lista-filmes'>
+                {filmes.map((filme) => {
+                    return (
+                        <article key={filme.id}>
+                            <strong> {filme.nome} </strong>
+                            <p> {filme.sinopse} </p>
+                            <img src={filme.foto} alt={filme.nome} />
+                            {/* link com o id do filme no banco de dados  */}
+                            <Link to={`/filme/${filme.id}`} className="link">Acessar</Link>
+                        </article>
+                    )
+                })}
+            </div>
         </div>
     )
 }

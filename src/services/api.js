@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from "axios";
 
+// recebe os dados do banco de dados
 const api = axios.create({
-    baseURL: 'https://newsdata.io/',
-    headers: {
-        "Content-Type": 'application/json'
-    }
+    // URL da api 
+    baseURL: 'https://sujeitoprogramador.com/'
 })
 
-export default api
+// importa os valores recebidos atraves da api
+export default api;
